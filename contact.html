@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form</title>
+    <style>
+        /* CSS styles for the contact form */
+        .contact-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .contact-form input[type="text"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .contact-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #0056b3;
+        }
+        .contact-form .error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body ng-app="contactApp" ng-controller="contactController">
+    <div class="contact-form">
+        <h2>Contact Form</h2>
+        <form name="contactForm" ng-submit="submitForm()" novalidate>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" ng-model="formData.name" required>
+            <span class="error" ng-show="contactForm.name.$error.required && contactForm.name.$dirty">Name is required</span>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" ng-model="formData.email" required>
+            <span class="error" ng-show="contactForm.email.$error.required && contactForm.email.$dirty">Email is required</span>
+
+            <label for="mobile">Mobile:</label>
+            <input type="text" id="mobile" name="mobile" ng-model="formData.mobile" required>
+            <span class="error" ng-show="contactForm.mobile.$error.required && contactForm.mobile.$dirty">Mobile number is required</span>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" ng-model="formData.message" required></textarea>
+            <span class="error" ng-show="contactForm.message.$error.required && contactForm.message.$dirty">Message is required</span>
+
+            
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script>
+        // AngularJS code for form validation and submission
+        angular.module('contactApp', [])
+            .controller('contactController', function($scope) {
+                $scope.formData = {};
+
+                $scope.submitForm = function() {
+                    if ($scope.contactForm.$valid) {
+                        // Perform form submission logic here
+                        console.log('Form submitted successfully');
+                    }
+                };
+            });
+    </script>
+</body>
+</html>
